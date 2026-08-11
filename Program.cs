@@ -1,9 +1,15 @@
 ﻿using GameLibrary;
 
+const bool useJsonPersistence = true;
+
+IGameRepository gameRepository = useJsonPersistence
+    ? new GameRepository()
+    : new InMemoryGameRepository();
+
 Utilities.PrintColoredLine("=== GAME LIBRARY ===", ConsoleColor.Black, ConsoleColor.DarkMagenta);
 
 string? option = null;
-GameLibraryService gameLibraryService = new();
+GameLibraryService gameLibraryService = new(gameRepository);
 
 do
 {

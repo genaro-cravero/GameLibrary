@@ -3,14 +3,15 @@
 internal class GameLibraryService
 {
     private readonly List<Game> _games = new();
-    private readonly GameRepository _repository = new();
+    private readonly IGameRepository _repository;
     public List<Game> GetAllGames()
     {
         return _games.ToList();
     }
 
-    public GameLibraryService()
+    public GameLibraryService(IGameRepository repository)
     {
+        _repository = repository;
         _games.AddRange(_repository.LoadGames());
     }
 

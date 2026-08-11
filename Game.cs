@@ -2,7 +2,6 @@
 
 public class Game
 {
-    public Game() { }
     public Game(string name, GameGenre genre, int releaseYear, bool isCompleted)
     {
         Name = name;
@@ -10,18 +9,10 @@ public class Game
         ReleaseYear = releaseYear;
         IsCompleted = isCompleted;
     }
-    public Game(Game instanceToCopy)
-    {
-        Name = instanceToCopy.Name;
-        Genre = instanceToCopy.Genre;
-        ReleaseYear = instanceToCopy.ReleaseYear;
-        IsCompleted = instanceToCopy.IsCompleted;
-    }
-
-    public string Name { get; set; } = string.Empty;
-    public GameGenre Genre { get; set; }
-    public int ReleaseYear { get; set; }
-    public bool IsCompleted { get; set; }
+    public string Name { get; } = string.Empty;
+    public GameGenre Genre { get; }
+    public int ReleaseYear { get; }
+    public bool IsCompleted { get; }
 
     public override bool Equals(object? obj)
     {

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 namespace GameLibrary;
 
-internal class GameRepository
+internal class GameRepository : IGameRepository
 {
     private readonly string _filePath;
 
@@ -28,7 +28,7 @@ internal class GameRepository
                 var games = JsonSerializer.Deserialize<List<Game>>(json);
                 return games ?? new List<Game>();
             }
-            catch (JsonException jsE)
+            catch (JsonException)
             {
                 Utilities.PrintColoredLine("--Failed to load games from JSON.", ConsoleColor.Red);
             }
