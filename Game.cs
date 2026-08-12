@@ -2,6 +2,12 @@
 
 public class Game
 {
+    public int Id { get; set; }
+    public string Name { get; init; } = string.Empty;
+    public GameGenre Genre { get; init; }
+    public int ReleaseYear { get; init; }
+    public bool IsCompleted { get; init; }
+    public Game() { }
     public Game(string name, GameGenre genre, int releaseYear, bool isCompleted)
     {
         Name = name;
@@ -9,10 +15,6 @@ public class Game
         ReleaseYear = releaseYear;
         IsCompleted = isCompleted;
     }
-    public string Name { get; } = string.Empty;
-    public GameGenre Genre { get; }
-    public int ReleaseYear { get; }
-    public bool IsCompleted { get; }
 
     public override bool Equals(object? obj)
     {
