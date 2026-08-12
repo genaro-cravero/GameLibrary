@@ -1,6 +1,6 @@
 ﻿namespace GameLibrary;
 
-internal class GameLibraryService
+public class GameLibraryService
 {
     private readonly List<Game> _games = new();
     private readonly IGameRepository _repository;
@@ -37,6 +37,8 @@ internal class GameLibraryService
 
     public List<Game> SearchGames(string keyword)
     {
+        if(string.IsNullOrWhiteSpace(keyword))
+            return new();
         return _games.Where(g => g.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 

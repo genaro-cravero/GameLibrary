@@ -1,7 +1,7 @@
 ﻿
 namespace GameLibrary;
 
-internal class InMemoryGameRepository : IGameRepository
+public class InMemoryGameRepository : IGameRepository
 {
     private List<Game> _games;
 

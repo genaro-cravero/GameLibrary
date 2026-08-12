@@ -1,7 +1,7 @@
 ﻿
 namespace GameLibrary
 {
-    internal interface IGameRepository
+    public interface IGameRepository
     {
         void SaveGames(List<Game> games);
         List<Game> LoadGames();
