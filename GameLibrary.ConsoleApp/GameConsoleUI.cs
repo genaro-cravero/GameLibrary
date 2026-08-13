@@ -1,4 +1,6 @@
-﻿namespace GameLibrary;
+﻿using GameLibrary;
+
+namespace GameLibrary.ConsoleApp;
 
 public class GameConsoleUI
 {

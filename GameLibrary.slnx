@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="GameLibrary.API/GameLibrary.API.csproj" />
+  <Project Path="GameLibrary.ConsoleApp/GameLibrary.ConsoleApp.csproj" />
   <Project Path="GameLibrary.csproj" />
-  <Project Path="GameLibrary.Tests/GameLibrary.Tests.csproj" />
 </Solution>

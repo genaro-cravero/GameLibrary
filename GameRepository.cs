@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 namespace GameLibrary;
 
-internal class GameRepository : IGameRepository
+public class GameRepository : IGameRepository
 {
     private readonly string _filePath;
 

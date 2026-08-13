@@ -1,6 +1,6 @@
 ﻿namespace GameLibrary;
 
-internal class Utilities
+public class Utilities
 {
     public static string FirstCharToUpper(string sentence)
     {
