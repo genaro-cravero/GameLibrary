@@ -1,0 +1,15 @@
+**/bin
+**/obj
+**/*.user
+**/*.suo
+**/node_modules
+**/packages
+**/.vs
+**/.vscode
+**/logs
+**/publish
+**/*.pidb
+**/*.pidb.metadata
+**/*.pdb
+*.db
+*.json
