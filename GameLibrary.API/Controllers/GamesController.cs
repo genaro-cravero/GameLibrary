@@ -35,7 +35,7 @@ public class GamesController : ControllerBase
     {
         if (_service.IsGameAlreadyAdded(game.Name))
         {
-            return Conflict($"El juego '{game.Name}' ya existe.");
+            return Conflict($"The game '{game.Name}' already exists.");
         }
 
         _service.AddGame(game);
@@ -49,7 +49,7 @@ public class GamesController : ControllerBase
         var games = _service.SearchGames(name);
         if (games.Count == 0)
         {
-            return NotFound($"No se encontró el juego con nombre: {name}");
+            return NotFound($"Game not found with name: {name}");
         }
 
         var gameToUpdate = games[0];
@@ -57,7 +57,7 @@ public class GamesController : ControllerBase
 
         if (!result)
         {
-            return BadRequest("No se pudo actualizar el juego.");
+            return BadRequest("Could not update the game.");
         }
 
         return Ok(updatedGame);
@@ -70,7 +70,7 @@ public class GamesController : ControllerBase
         var games = _service.SearchGames(name);
         if (games.Count == 0)
         {
-            return NotFound($"No se encontró el juego con nombre: {name}");
+            return NotFound($"Game not found with name: {name}");
         }
 
         var gameToDelete = games[0];
@@ -78,7 +78,7 @@ public class GamesController : ControllerBase
 
         if (!result)
         {
-            return BadRequest("No se pudo eliminar el juego.");
+            return BadRequest("Could not delete the game.");
         }
 
         return NoContent();

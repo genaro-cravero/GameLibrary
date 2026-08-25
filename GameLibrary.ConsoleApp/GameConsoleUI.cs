@@ -26,18 +26,18 @@ public class GameConsoleUI
 
     private void WriteOptions()
     {
-        Console.WriteLine("1) Ver juegos");
-        Console.WriteLine("2) Agregar juego");
-        Console.WriteLine("3) Buscar juego");
-        Console.WriteLine("4) Actualizar datos de juego");
-        Console.WriteLine("5) Eliminar juego");
-        Console.WriteLine("0) Salir");
+        Console.WriteLine("1) View Games");
+        Console.WriteLine("2) Add Game");
+        Console.WriteLine("3) Search Game");
+        Console.WriteLine("4) Update Game Data");
+        Console.WriteLine("5) Delete Game");
+        Console.WriteLine("0) Exit");
     }
 
     private string? GetChosenOption()
     {
         WriteOptions();
-        Console.Write("Elegí una opción: ");
+        Console.Write("Choose an option: ");
         return Console.ReadLine();
     }
 
@@ -62,10 +62,10 @@ public class GameConsoleUI
                 DeleteGame();
                 break;
             case "0":
-                Console.WriteLine("Hasta luego!");
+                Console.WriteLine("Goodbye!");
                 break;
             default:
-                Console.WriteLine("Opción no válida.");
+                Console.WriteLine("Invalid option.");
                 break;
         }
         Console.WriteLine();
@@ -84,17 +84,17 @@ public class GameConsoleUI
 
     private void ShowSingleGame(Game game, string prefix = "", ConsoleColor font = ConsoleColor.White, ConsoleColor bgColor = ConsoleColor.Black)
     {
-        Utilities.PrintColoredLine($"{prefix}{game.Name} ||| Género: {game.Genre} ||| Lo completaste = {(game.IsCompleted ? "si" : "no")}", font, bgColor);
+        Utilities.PrintColoredLine($"{prefix}{game.Name} ||| Genre: {game.Genre} ||| Completed = {(game.IsCompleted ? "yes" : "no")}", font, bgColor);
     }
 
     private void AddGame()
     {
-        Console.WriteLine("Agregando juego...");
+        Console.WriteLine("Adding game...");
 
         Game? newGame = GetNewGameFromUser();
         if (newGame == null)
         {
-            Console.WriteLine("Ocurrió un error creando el juego.");
+            Console.WriteLine("An error occurred creating the game.");
             return;
         }
 
@@ -114,13 +114,13 @@ public class GameConsoleUI
 
     private string? GetGameName()
     {
-        Console.Write("Ingrese el nombre del juego: ");
+        Console.Write("Enter game name: ");
         string name = Console.ReadLine() ?? "";
         name = Utilities.FirstCharToUpper(name);
 
         if (_service.IsGameAlreadyAdded(name))
         {
-            Console.WriteLine("Este juego ya fue agregado.");
+            Console.WriteLine("This game has already been added.");
             return null;
         }
 
@@ -143,7 +143,7 @@ public class GameConsoleUI
         GameGenre genre;
         do
         {
-            Console.WriteLine($"Ingrese el género del juego: \n{genres}");
+            Console.WriteLine($"Enter the game genre: \n{genres}");
             string genreInput = Console.ReadLine() ?? "";
             correctlyGenred = Enum.TryParse(genreInput, true, out GameGenre parsedGenre);
             correctlyGenred &= Enum.IsDefined(parsedGenre);
@@ -151,7 +151,7 @@ public class GameConsoleUI
 
             if (!correctlyGenred)
             {
-                Console.WriteLine("Género inválido, intente nuevamente");
+                Console.WriteLine("Invalid genre, try again");
             }
         } while (!correctlyGenred);
 
@@ -160,14 +160,14 @@ public class GameConsoleUI
 
     private int GetGameYear()
     {
-        Console.Write("Ingrese el año de lanzamiento del juego: ");
+        Console.Write("Enter the game release year: ");
         var strYear = Console.ReadLine();
         int releaseYear = int.TryParse(strYear, out int year) ? year : 0;
 
         while (releaseYear < 1950)
         {
-            Console.WriteLine("Año inválido, intente nuevamente");
-            Console.Write("Ingrese el año de lanzamiento del juego: ");
+            Console.WriteLine("Invalid year, try again");
+            Console.Write("Enter the game release year: ");
             releaseYear = int.TryParse(Console.ReadLine(), out year) ? year : 0;
         }
 
@@ -176,20 +176,20 @@ public class GameConsoleUI
 
     private bool GetGameCompleted()
     {
-        return ChooseYesOrNo("¿Has terminado el juego?");
+        return ChooseYesOrNo("Have you finished the game?");
     }
 
     private bool ChooseYesOrNo(string questionToRepeat = "")
     {
-        Console.Write($"{questionToRepeat} (s/n): ");
+        Console.Write($"{questionToRepeat} (y/n): ");
         string yesOrNo = Console.ReadLine()?.ToLower() ?? "";
-        while (yesOrNo != "s" && yesOrNo != "n")
+        while (yesOrNo != "y" && yesOrNo != "n")
         {
-            Console.WriteLine("Respuesta inválida, intente nuevamente");
-            Console.Write($"{questionToRepeat} (s/n): ");
+            Console.WriteLine("Invalid response, try again");
+            Console.Write($"{questionToRepeat} (y/n): ");
             yesOrNo = Console.ReadLine()?.ToLower() ?? "";
         }
-        return yesOrNo == "s";
+        return yesOrNo == "y";
     }
 
     private void SearchGame()
@@ -197,7 +197,7 @@ public class GameConsoleUI
         var gamesFound = GetSearchedGame();
         if (gamesFound.Count <= 0)
         {
-            Console.WriteLine("No se encontraron coincidencias.");
+            Console.WriteLine("No matches found.");
             return;
         }
         foreach (var game in gamesFound)
@@ -208,11 +208,11 @@ public class GameConsoleUI
 
     private List<Game> GetSearchedGame()
     {
-        Console.Write("Ingrese el nombre del juego o palabra clave a buscar: ");
+        Console.Write("Enter the game name or keyword to search: ");
         var name = Console.ReadLine();
         while (string.IsNullOrWhiteSpace(name))
         {
-            Console.Write("Ingreso inválido, intente nuevamente: ");
+            Console.Write("Invalid input, try again: ");
             name = Console.ReadLine();
         }
         return _service.SearchGames(name);
@@ -226,12 +226,12 @@ public class GameConsoleUI
         string option = "";
         do
         {
-            Console.WriteLine($"Qué quiere modificar de '{targetGame.Name}'?");
-            Console.WriteLine("1) Nombre");
-            Console.WriteLine("2) Género");
-            Console.WriteLine("3) Año de lanzamiento");
-            Console.WriteLine("4) Estado de finalización");
-            Console.WriteLine("0) Finalizar operación");
+            Console.WriteLine($"What do you want to modify of '{targetGame.Name}'?");
+            Console.WriteLine("1) Name");
+            Console.WriteLine("2) Genre");
+            Console.WriteLine("3) Release Year");
+            Console.WriteLine("4) Completion Status");
+            Console.WriteLine("0) Exit");
 
             option = Console.ReadLine() ?? "";
             switch (option)
@@ -244,11 +244,11 @@ public class GameConsoleUI
                         var updatedGameName = new Game(gameName, targetGame.Genre, targetGame.ReleaseYear, targetGame.IsCompleted);
                         _service.UpdateGame(targetGame, updatedGameName);
                         targetGame = updatedGameName;
-                        Console.WriteLine($"Nombre cambiado de '{prevName}' a '{gameName}' exitosamente!");
+                        Console.WriteLine($"Name changed from '{prevName}' to '{gameName}' successfully!");
                     }
                     else
                     {
-                        Console.WriteLine($"Ocurrió un error cambiando el nombre de '{targetGame.Name}'");
+                        Console.WriteLine($"An error occurred while changing the name of '{targetGame.Name}'");
                     }
                     break;
                 case "2":
@@ -257,7 +257,7 @@ public class GameConsoleUI
                     var updatedGameGenre = new Game(targetGame.Name, gameGenre, targetGame.ReleaseYear, targetGame.IsCompleted);
                     _service.UpdateGame(targetGame, updatedGameGenre);
                     targetGame = updatedGameGenre;
-                    Console.WriteLine($"Género cambiado de '{prevGenre}' a '{gameGenre}' exitosamente!");
+                    Console.WriteLine($"Genre changed from '{prevGenre}' to '{gameGenre}' successfully!");
                     break;
                 case "3":
                     int gameYear = GetGameYear();
@@ -265,7 +265,7 @@ public class GameConsoleUI
                     var updatedGameYear = new Game(targetGame.Name, targetGame.Genre, gameYear, targetGame.IsCompleted);
                     _service.UpdateGame(targetGame, updatedGameYear);
                     targetGame = updatedGameYear;
-                    Console.WriteLine($"Año de lanzamiento cambiado de '{prevRelease}' a '{gameYear}' exitosamente!");
+                    Console.WriteLine($"Release Year changed from '{prevRelease}' to '{gameYear}' successfully!");
                     break;
                 case "4":
                     bool gameCompleted = GetGameCompleted();
@@ -273,13 +273,13 @@ public class GameConsoleUI
                     var updatedGameCompleted = new Game(targetGame.Name, targetGame.Genre, targetGame.ReleaseYear, gameCompleted);
                     _service.UpdateGame(targetGame, updatedGameCompleted);
                     targetGame = updatedGameCompleted;
-                    Console.WriteLine($"Estado de finalización cambiado de {prevCompleted} a {gameCompleted} exitosamente!");
+                    Console.WriteLine($"Completion Status changed from {prevCompleted} to {gameCompleted} successfully!");
                     break;
                 case "0":
-                    Console.WriteLine("Finalizando Operación.");
+                    Console.WriteLine("Exiting Operation.");
                     break;
                 default:
-                    Console.WriteLine("Opción inválida, intente nuevamente.");
+                    Console.WriteLine("Invalid option, please try again.");
                     break;
             }
         } while (option != "0");
@@ -292,13 +292,13 @@ public class GameConsoleUI
         {
             while (gamesFound.Count > 5)
             {
-                Console.WriteLine("Demasiadas coincidencias. Intente con algo más específico.");
+                Console.WriteLine("Too many matches. Please try something more specific.");
                 gamesFound = GetSearchedGame();
             }
         }
         if (gamesFound.Count <= 0)
         {
-            Console.WriteLine("No se encontraron coincidencias");
+            Console.WriteLine("No matches found");
             return null;
         }
 
@@ -306,21 +306,21 @@ public class GameConsoleUI
         if (gamesFound.Count > 1)
         {
             int index = 1;
-            Console.WriteLine($"Selecciona una de las siguientes opciones del 1 al {gamesFound.Count}:");
+            Console.WriteLine($"Select one of the following options from 1 to {gamesFound.Count}:");
             foreach (var game in gamesFound)
             {
                 ShowSingleGame(game, $"{index}) ");
                 index++;
             }
 
-            Console.Write("Nº de Juego seleccionado: ");
+            Console.Write("Selected Game Number: ");
             var selectionInput = Console.ReadLine();
             int selectedIndex = int.TryParse(selectionInput, out index) ? index : 0;
 
             while (selectedIndex <= 0 || selectedIndex > gamesFound.Count)
             {
-                Console.WriteLine("Número inválido, intente nuevamente");
-                Console.Write($"Seleccione un juego del 1 al {gamesFound.Count}: ");
+                Console.WriteLine("Invalid number, please try again");
+                Console.Write($"Select a game from 1 to {gamesFound.Count}: ");
                 selectedIndex = int.TryParse(Console.ReadLine(), out index) ? index : 0;
             }
 
@@ -336,15 +336,15 @@ public class GameConsoleUI
         if (targetGame == null) return;
 
         var gameName = targetGame.Name;
-        bool sureToDelete = ChooseYesOrNo($"Estas seguro que quieres eliminar {gameName}?");
+        bool sureToDelete = ChooseYesOrNo($"Are you sure you want to delete {gameName}?");
         if (!sureToDelete)
         {
-            Console.WriteLine("Operación cancelada!");
+            Console.WriteLine("Operation cancelled!");
             return;
         }
 
         bool removed = _service.DeleteGame(targetGame);
-        var str = removed ? $"{gameName} removido exitosamente!" : $"No se pudo eliminar {gameName}";
+        var str = removed ? $"{gameName} deleted successfully!" : $"Could not delete {gameName}";
         Console.WriteLine(str);
     }
 }

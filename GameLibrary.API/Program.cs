@@ -44,7 +44,7 @@ class Program
                 Type = SecuritySchemeType.Http,
                 Scheme = "bearer",
                 BearerFormat = "JWT",
-                Description = "Ingresá tu token JWT"
+                Description = "Enter your JWT token"
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement

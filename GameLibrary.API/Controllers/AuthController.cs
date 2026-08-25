@@ -26,14 +26,14 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest request)
     {
-        // Harcoded user
+        // Hardcoded user for demonstration
         if (request.Username == "admin" && request.Password == "admin123")
         {
             var token = GenerateJwtToken(request.Username);
             return Ok(new { token });
         }
 
-        return Unauthorized("Usuario o contraseña incorrectos");
+        return Unauthorized("Invalid username or password");
     }
 
     private string GenerateJwtToken(string username)
