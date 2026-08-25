@@ -1,71 +1,36 @@
-GameLibrary API
+# GameLibrary API
+
 A RESTful API for managing a video game library with JWT authentication, built with .NET 10 and Entity Framework Core. Containerized with Docker for easy deployment.
 
-🚀 Features
-CRUD Operations - Create, Read, Update, Delete games
+# 🚀 Features
+ * CRUD Operations - Create, Read, Update, Delete games
+ * Search - Search games by name (case-insensitive)
+ * Authentication - JWT token-based authentication
+ * Authorization - Protected endpoints with role-based access
+ * Persistence - SQLite database with Entity Framework Core
+ * Testing - 12+ unit tests with xUnit
+ * Containerization - Docker support (Linux containers)
+ * API Documentation - Swagger/OpenAPI
+ * Multiple Repositories - JSON, InMemory, and SQL implementations
 
-Search - Search games by name (case-insensitive)
+# 🛠️ Tech Stack
+ - Technology	Purpose
+ - .NET 10	Runtime & Framework
+ - ASP.NET Core Web API	REST API
+ - Entity Framework Core	ORM for database access
+ - SQLite	Database
+ - JWT	Authentication
+ - xUnit	Unit testing
+ - Docker	Containerization
+ - Swagger/Scalar	API documentation
 
-Authentication - JWT token-based authentication
-
-Authorization - Protected endpoints with role-based access
-
-Persistence - SQLite database with Entity Framework Core
-
-Testing - 12+ unit tests with xUnit
-
-Containerization - Docker support (Linux containers)
-
-API Documentation - Swagger/OpenAPI
-
-Multiple Repositories - JSON, InMemory, and SQL implementations
-
-🛠️ Tech Stack
-Technology	Purpose
-.NET 10	Runtime & Framework
-ASP.NET Core Web API	REST API
-Entity Framework Core	ORM for database access
-SQLite	Database
-JWT	Authentication
-xUnit	Unit testing
-Docker	Containerization
-Swagger/Scalar	API documentation
-📋 Prerequisites
+# 📋 Prerequisites
 .NET 10 SDK
 
 Docker Desktop (for containerized execution)
 
 Git (optional)
 
-🔧 Project Structure
-text
-GameLibrary/
-├── GameLibrary/                     # Business logic & core domain
-│   ├── Game.cs                      # Game model (immutable)
-│   ├── GameLibraryService.cs        # CRUD business logic
-│   ├── IGameRepository.cs           # Repository interface
-│   ├── GameRepository.cs            # JSON persistence
-│   ├── InMemoryGameRepository.cs    # In-memory (for testing)
-│   ├── SqlGameRepository.cs         # SQLite persistence
-│   └── GameDbContext.cs             # EF Core context
-│
-├── GameLibrary.Tests/               # Unit tests (xUnit)
-│   └── GameLibraryServiceTests.cs   # 12+ test cases
-│
-├── GameLibrary.API/                 # Web API
-│   ├── Controllers/
-│   │   ├── GamesController.cs       # CRUD endpoints
-│   │   └── AuthController.cs        # Login & JWT
-│   ├── Program.cs                   # Configuration & DI
-│   └── appsettings.json             # JWT & environment settings
-│
-├── GameLibrary.ConsoleApp/          # Console UI (alternative client)
-│   ├── Program.cs
-│   └── GameConsoleUI.cs
-│
-├── Dockerfile                       # Docker configuration
-├── .dockerignore                    # Docker ignore file
-└── GameLibrary.sln                  # Visual Studio solution
 🚀 Running the Application
 Option 1: Run with Docker (Recommended)
 bash
