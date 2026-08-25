@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using GameLibrary;
+﻿using GameLibrary;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GameLibrary.API.Controllers;
 
@@ -28,6 +29,7 @@ public class GamesController : ControllerBase
         return Ok(games);
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Create([FromBody] Game game)
     {
@@ -40,6 +42,7 @@ public class GamesController : ControllerBase
         return CreatedAtAction(nameof(GetAll), new { name = game.Name }, game);
     }
 
+    [Authorize]
     [HttpPut("{name}")]
     public IActionResult Update(string name, [FromBody] Game updatedGame)
     {
@@ -60,6 +63,7 @@ public class GamesController : ControllerBase
         return Ok(updatedGame);
     }
 
+    [Authorize]
     [HttpDelete("{name}")]
     public IActionResult Delete(string name)
     {
