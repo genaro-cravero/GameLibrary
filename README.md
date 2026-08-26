@@ -183,5 +183,4 @@ dotnet build
 This project is for educational purposes.
 
 ## 👨‍💻 Author
-**Genaro Nicolás Cravero** 
-Developed as part of a .NET learning journey.
+Developed by **Genaro Nicolás Cravero** as part of a .NET learning journey.
