@@ -25,11 +25,11 @@ A RESTful API for managing a video game library with JWT authentication, built w
  - Swagger/Scalar	API documentation
 
 ## 📋 Prerequisites
-.NET 10 SDK\
+.NET 10 SDK
 
-Docker Desktop (for containerized execution)\
+Docker Desktop (for containerized execution)
 
-Git (optional)\
+Git (optional)
 
 ## 🚀 Running the Application
 ### Option 1: Run with Docker (Recommended)
@@ -43,11 +43,11 @@ docker run -d -p 5059:8080 -e ASPNETCORE_ENVIRONMENT=Development --name gamelibr
 3. **Check if the container is running**\
 docker ps
 
-- Access the API:\
+- Access the API:
 
-Swagger UI: http://localhost:5059/swagger\
+Swagger UI: http://localhost:5059/swagger
 
-Base URL: http://localhost:5059/api\
+Base URL: http://localhost:5059/api
 
 ### Option 2: Run with .NET SDK (Without Docker)
 
@@ -60,11 +60,11 @@ dotnet restore
 3. **Run the application**\
 dotnet run
 
-- Access:\
+- Access:
 
-Swagger UI: https://localhost:5001/swagger \
+Swagger UI: https://localhost:5001/swagger
 
-Base URL: https://localhost:5001/api \
+Base URL: https://localhost:5001/api
 
 ### Option 3: Run the Console Application
 
@@ -75,36 +75,36 @@ cd GameLibrary.ConsoleApp
 dotnet run
 
 ## 🔑 Authentication
-The API uses JWT (JSON Web Tokens) for authentication.\
+The API uses JWT (JSON Web Tokens) for authentication.
 
 Default Credentials\
 json\
 {\
   "username": "admin",\
   "password": "admin123"\
-}\
+}
 
 ### Getting a Token
 
 **Using curl (PowerShell)**\
-curl.exe -X POST http://localhost:5059/api/auth/login -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"admin123\"}"\
+curl.exe -X POST http://localhost:5059/api/auth/login -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"admin123\"}"
 
 **Using PowerShell Invoke-WebRequest**
 $body = @{ username = "admin"; password = "admin123" } | ConvertTo-Json
-Invoke-WebRequest -Uri http://localhost:5059/api/auth/login -Method POST -Body $body -ContentType "application/json" \
+Invoke-WebRequest -Uri http://localhost:5059/api/auth/login -Method POST -Body $body -ContentType "application/json"
 
-- *Response*: \
+- *Response*: 
 
 json\
 {\
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
-}\
+}
 
 ### Using the Token
-Include the token in the Authorization header for protected endpoints: \
+Include the token in the Authorization header for protected endpoints: 
 
-**Add a game (requires authentication)**
-curl.exe -X POST http://localhost:5059/api/games -H "Authorization: Bearer **YOUR_TOKEN**" -H "Content-Type: application/json" -d "{\"name\":\"Hollow Knight\",\"genre\":7,\"releaseYear\":2017,\"isCompleted\":false}"  \
+**Add a game (requires authentication)** \
+curl.exe -X POST http://localhost:5059/api/games -H "Authorization: Bearer **YOUR_TOKEN**" -H "Content-Type: application/json" -d "{\"name\":\"Hollow Knight\",\"genre\":7,\"releaseYear\":2017,\"isCompleted\":false}"  
 
 **📡 API Endpoints**
 Method | Endpoint | Description | Auth Required \
@@ -114,7 +114,7 @@ GET | /api/games/search?name={keyword} | Search games by name | ❌ \
 POST | /api/games | Add a new game | ✅ \
 PUT | /api/games/{name} | Update a game | ✅ \
 DELETE | /api/games/{name} | Delete a game | ✅ \
-**Game Model**
+\**Game Model**\
 json\
 {\
   "id": 1, \
@@ -122,9 +122,9 @@ json\
   "genre": 7, \
   "releaseYear": 2017, \
   "isCompleted": false \
-}\ 
+}
 
-**Genres (Enum Values)**:
+**Genres (Enum Values)**:\
 0: Action \
 1: Adventure \
 2: RPG \
@@ -133,19 +133,19 @@ json\
 5: Sports \
 6: Puzzle \
 7: MetroidVania \
-8: Other \
+8: Other 
 
-## 🧪 Running Tests##
+## 🧪 Running Tests
 
 **Run all tests**
 dotnet test
 
 **Run specific test**
-dotnet test --filter "FullyQualifiedName~SearchGames" \
+dotnet test --filter "FullyQualifiedName~SearchGames" 
 
 **Expected Output:**
 
-Total tests: 12 Passed: 12 Failed: 0 Skipped: 0 \
+Total tests: 12 Passed: 12 Failed: 0 Skipped: 0 
 
 ## Build the image
 docker build -t gamelibrary-api .
@@ -183,5 +183,5 @@ dotnet build
 This project is for educational purposes.
 
 ## 👨‍💻 Author
-**Genaro Nicolás Cravero **
+**Genaro Nicolás Cravero** 
 Developed as part of a .NET learning journey.
